@@ -1,0 +1,33 @@
+ python3 -m venv torenv
+source torenv/bin/activate
+
+python3 tor_mirror.py
+
+sudo tor
+
+sudo cat /var/lib/tor/hidden_service/hostname
+
+
+
+docker steps
+don't build again
+
+docker build -t tor-onion-app .
+
+docker run -d --name tor-hidden-service -v "$(Get-Location)/hs:/var/lib/tor/hidden_service" sankezzz/tor-onion-app
+
+
+run this when restart pe run chiye 
+docker run -d --name tor-hidden-service --restart=always -v "$(Get-Location)/hs:/var/lib/tor/hidden_service" sankezzz/tor-onion-app
+
+
+run this after work is done 
+
+docker stop tor-hidden-service
+docker rm tor-hidden-service
+
+docker restart tor-hidden-service
+
+
+
+
