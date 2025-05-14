@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  flask:
+    build: .
+    container_name: flask_app
+    expose:
+      - "8080"
+    networks:
+      - tor_net
+
+tor:
+  image: goldy/tor-hidden-service
+  container_name: tor_service
+  restart: always
+  networks:
+    - tor_net
+  volumes:
+    - ./tor/torrc:/etc/tor/torrc
+    - tor_data:/var/lib/tor
+  
+
+volumes:
+  tor_data:
+
+networks:
+  tor_net:
